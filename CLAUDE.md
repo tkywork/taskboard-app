@@ -4,48 +4,58 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a taskboard application. Update this section with the tech stack and architecture details as the project evolves.
+タスクの追加・完了・削除ができるシンプルなタスクボードアプリ。タスクは localStorage に永続化される。
+
+**Tech Stack**
+
+| 区分 | 技術 |
+|---|---|
+| UI フレームワーク | React 19 |
+| ビルドツール | Vite 8 |
+| スタイリング | CSS (CSS Variables) |
+| 状態管理 | React useState / useEffect |
+| データ永続化 | localStorage |
+| CI/CD | GitHub Actions |
+
+## Naming Conventions
+
+- **コンポーネントファイル**: PascalCase（例: `TaskItem.jsx`）
+- **コンポーネント関数**: PascalCase の named export（例: `export default function App()`）
+- **CSS クラス名**: kebab-case（例: `.task-item`, `.delete-btn`）
+- **localStorage キー**: `taskboard-` プレフィックス（例: `taskboard-tasks`）
+- **イベントハンドラ**: `handle` プレフィックス（例: `handleKeyDown`）、または動詞のみ（例: `addTask`, `toggleTask`）
+
+## デプロイ先
+
+https://tkywork.github.io/taskboard-app/
+
+`main` ブランチへの push で GitHub Actions が自動ビルド・デプロイする。  
+Vite の `base` は `/taskboard-app/` に設定済み（[vite.config.js](vite.config.js)）。
 
 ## Git Operations
 
-**Push to GitHub after every code change.**
+**コードを変更するたびに GitHub にプッシュする。**
 
-- After every meaningful code change (feature, fix, refactor), commit and push to GitHub immediately.
-- Use clear, descriptive commit messages in Japanese or English consistent with the project convention.
-- Never accumulate multiple unrelated changes in a single commit.
+- 機能追加・修正・リファクタリング問わず、変更のたびにコミット＆プッシュする。
+- コミットメッセージは日本語または英語で簡潔に記述する。
+- 無関係な変更を1コミットにまとめない。
 
 ```bash
-git add <changed files>
+git add <変更ファイル>
 git commit -m "変更内容を簡潔に説明するメッセージ"
 git push
 ```
 
-Initialize and connect to GitHub if not yet done:
-
-```bash
-git init
-git remote add origin https://github.com/<owner>/taskboard-app.git
-git branch -M main
-git push -u origin main
-```
-
 ## Development Commands
 
-Update this section once the tech stack is decided. Common patterns:
-
 ```bash
-# Install dependencies
-npm install       # Node.js / React / Vue etc.
-pip install -r requirements.txt  # Python
+# 依存パッケージのインストール
+npm install
 
-# Start dev server
+# 開発サーバー起動
 npm run dev
 
-# Run tests
-npm test
-npm run test -- --testPathPattern=<file>  # single test file
-
-# Build
+# ビルド
 npm run build
 
 # Lint
